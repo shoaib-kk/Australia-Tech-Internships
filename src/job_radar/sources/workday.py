@@ -10,7 +10,7 @@ from __future__ import annotations
 from ..http import pause, post_json
 from ..models import Job
 
-DEFAULT_TERMS = ["intern", "graduate", "vacation", "summer", "student", "cadet"]
+DEFAULT_TERMS = ["intern", "graduate", "vacation", "summer", "student", "cadet", "undergraduate"]
 PAGE = 20        # Workday caps page size at 20
 MAX_PAGES = 5    # per search term
 

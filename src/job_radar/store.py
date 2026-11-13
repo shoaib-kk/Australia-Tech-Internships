@@ -10,7 +10,12 @@ from .models import Job
 
 
 class SeenStore:
-    """data/seen.json maps job.key -> {first_seen, last_seen, title, company}."""
+    """data/seen.json maps job.key -> role details plus first_seen / last_seen.
+
+    It doubles as the archive behind README.md: a role stays listed after its
+    ad closes, and is only dropped once the calendar year it was last seen in
+    is over.
+    """
 
     def __init__(self, path: Path):
         self.path = path
@@ -21,21 +26,24 @@ class SeenStore:
         new = []
         stamp = today.isoformat()
         for j in jobs:
+            details = {"company": j.company, "title": j.title, "location": j.location,
+                       "url": j.url, "category": j.category, "score": j.score,
+                       "posted": j.posted}
             entry = self.data.get(j.key)
             if entry is None:
-                self.data[j.key] = {"first_seen": stamp, "last_seen": stamp,
-                                    "company": j.company, "title": j.title}
+                self.data[j.key] = {"first_seen": stamp, "last_seen": stamp, **details}
                 new.append(j)
             else:
-                entry["last_seen"] = stamp
+                entry.update(details, last_seen=stamp)
         return new
 
     def first_seen(self, job: Job) -> str:
         return self.data.get(job.key, {}).get("first_seen", "")
 
-    def prune(self, today: date, keep_days: int = 180) -> None:
-        cutoff = date.fromordinal(today.toordinal() - keep_days).isoformat()
-        self.data = {k: v for k, v in self.data.items() if v["last_seen"] >= cutoff}
+    def prune(self, today: date) -> None:
+        """Drop roles that closed in an earlier calendar year."""
+        year = str(today.year)
+        self.data = {k: v for k, v in self.data.items() if v["last_seen"][:4] >= year}
 
     def save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)

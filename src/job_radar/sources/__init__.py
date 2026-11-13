@@ -5,7 +5,6 @@ import html
 import re
 from datetime import datetime, timezone
 
-from .adzuna import fetch_adzuna
 from .ats import fetch_ashby, fetch_greenhouse, fetch_lever, fetch_smartrecruiters
 from .workday import fetch_workday
 
@@ -17,7 +16,7 @@ FETCHERS = {
     "workday": fetch_workday,
 }
 
-__all__ = ["FETCHERS", "fetch_adzuna", "strip_html", "to_date"]
+__all__ = ["FETCHERS", "strip_html", "to_date"]
 
 
 def strip_html(text: str | None, limit: int = 4000) -> str:

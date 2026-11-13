@@ -1,7 +1,7 @@
 [project]
 name = "job-radar"
 version = "1.0.0"
-description = "Weekly finder for tech internships and graduate roles in Australia, from public ATS job feeds and the Adzuna API."
+description = "Weekly finder for tech internships and graduate roles in Australia, from public company job boards."
 requires-python = ">=3.10"
 dependencies = ["requests>=2.31", "PyYAML>=6.0"]
 

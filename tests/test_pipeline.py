@@ -52,15 +52,6 @@ WORKDAY = {"total": 2, "jobPostings": [
     {"title": "IT Service Desk Cadet", "externalPath": "/job/Melbourne/Cadet_REQ2",
      "locationsText": "Melbourne, VIC", "postedOn": "Posted Today"},
 ]}
-ADZUNA = {"results": [
-    # duplicate of the Lever role -> should collapse into the Lever one
-    {"id": 99, "title": "Graduate Software Developer", "company": {"display_name": "Deputy"},
-     "location": {"display_name": "Sydney, New South Wales"}, "redirect_url": "https://adz/99",
-     "created": "2026-11-11T00:00:00Z", "description": "python"},
-    {"id": 100, "title": "Junior Data Analyst", "company": {"display_name": "Small Co"},
-     "location": {"display_name": "Geelong, Victoria"}, "redirect_url": "https://adz/100",
-     "created": "2026-11-13T00:00:00Z", "description": "SQL and Power BI"},
-]}
 
 
 class FakeResp:
@@ -85,8 +76,6 @@ class FakeSession:
             return FakeResp(ASHBY)
         if "smartrecruiters" in url:
             return FakeResp(SMARTR)
-        if "adzuna" in url:
-            return FakeResp(ADZUNA if url.endswith("/1") else {"results": []})
         raise AssertionError(url)
 
     def post(self, url, json=None, **kw):
@@ -104,10 +93,7 @@ def project(tmp_path, monkeypatch):
         "smartrecruiters": [{"id": "KPMGAustralia1", "name": "KPMG Australia"}],
         "workday": [{"tenant": "cba", "wd": "wd3", "site": "CommBank_Careers", "name": "CommBank",
                      "search_terms": ["graduate"]}],
-        "adzuna": {"queries": ["software intern"], "pages_per_query": 1},
     }))
-    monkeypatch.setenv("ADZUNA_APP_ID", "x")
-    monkeypatch.setenv("ADZUNA_APP_KEY", "y")
     return tmp_path
 
 
@@ -125,19 +111,15 @@ def test_end_to_end(project):
         "2026/27 KPMG Vacationer (Intern) Program",
         "2027 CommBank Graduate Campaign",
         "IT Service Desk Cadet",
-        "Junior Data Analyst",
     ])
     # dropped: senior, US-only, "Internal" (not an intern), non-tech sales, global remote
-    # the Adzuna duplicate of Deputy's role collapses onto the direct Lever link
-    dev = next(j for j in res["all"] if j.title == "Graduate Software Developer")
-    assert dev.source == "lever"
     # one broken board is reported, not fatal
     assert len(res["errors"]) == 1 and "Broken Co" in res["errors"][0]
 
     out = project / "output"
     assert (out / "openings.csv").exists() and (out / "new_this_week.md").exists()
     md = (out / "new_this_week.md").read_text()
-    assert "7 new" in md and "Broken Co" in md
+    assert "6 new" in md and "Broken Co" in md
 
 
 def test_second_run_only_reports_new(project):
@@ -179,3 +161,26 @@ def test_rejects(title):
         assert ok and j.category == "General program"  # kept but scored low
     else:
         assert not ok
+
+
+class ClosingSession(FakeSession):
+    """Same boards, but the KPMG vacationer ad has closed."""
+    def get(self, url, **kw):
+        if "smartrecruiters" in url:
+            return FakeResp({"totalFound": 0, "content": []})
+        return super().get(url, **kw)
+
+
+def test_readme_keeps_closed_roles_until_year_end(project):
+    run(project, today=TODAY, session=FakeSession())
+    run(project, today=date(2026, 11, 22), session=ClosingSession())
+    readme = (project / "README.md").read_text()
+    open_part, closed_part = readme.split("## Closed")
+    assert "KPMG Vacationer" in closed_part and "KPMG Vacationer" not in open_part
+    assert "Graduate Software Developer" in open_part and "https://lever/a" in open_part
+
+    # new year: the closed KPMG role is dropped, roles still open stay
+    run(project, today=date(2027, 1, 3), session=ClosingSession())
+    readme = (project / "README.md").read_text()
+    assert "KPMG Vacationer" not in readme
+    assert "Graduate Software Developer" in readme

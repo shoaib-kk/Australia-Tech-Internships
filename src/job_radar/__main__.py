@@ -1,4 +1,4 @@
-"""CLI:  python -m job_radar run [--no-adzuna] [--dry-run]
+"""CLI:  python -m job_radar run [--dry-run]
         python -m job_radar validate
 """
 from __future__ import annotations
@@ -17,7 +17,6 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="job_radar", description=__doc__)
     ap.add_argument("command", choices=["run", "validate"])
     ap.add_argument("--root", type=Path, default=ROOT, help="project folder (config/, data/, output/)")
-    ap.add_argument("--no-adzuna", action="store_true", help="skip the Adzuna API")
     ap.add_argument("--dry-run", action="store_true", help="don't write state or outputs")
     ap.add_argument("-q", "--quiet", action="store_true")
     a = ap.parse_args(argv)
@@ -31,7 +30,7 @@ def main(argv=None) -> int:
             bad += status.startswith("ERR")
         return 1 if bad else 0
 
-    result = run(a.root, use_adzuna=not a.no_adzuna, dry_run=a.dry_run)
+    result = run(a.root, dry_run=a.dry_run)
     print(f"\n{result['stats']['new']} new / {result['stats']['matched']} matching roles.")
     for j in sorted(result["new"], key=lambda j: -j.score)[:15]:
         print(f"  {j.score:>5g}  {j.company:22.22s} {j.title[:60]:60s} {j.location[:30]}")

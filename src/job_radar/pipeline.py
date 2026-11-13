@@ -12,8 +12,8 @@ import yaml
 from .filters import JobFilter
 from .http import make_session
 from .models import Job
-from .report import write_outputs
-from .sources import FETCHERS, fetch_adzuna
+from .report import write_outputs, write_readme
+from .sources import FETCHERS
 from .store import SeenStore, already_applied, load_applied
 
 log = logging.getLogger("job_radar")
@@ -33,6 +33,8 @@ class Paths:
     def seen(self): return self.root / "data" / "seen.json"
     @property
     def output(self): return self.root / "output"
+    @property
+    def readme(self): return self.root / "README.md"
 
 
 @dataclass
@@ -46,7 +48,7 @@ def board_label(kind: str, board: dict) -> str:
     return f"{board.get('name') or board.get('id') or board.get('tenant')} ({kind})"
 
 
-def fetch_all(companies: dict, session=None, workers: int = 6, use_adzuna: bool = True) -> FetchResult:
+def fetch_all(companies: dict, session=None, workers: int = 6) -> FetchResult:
     session = session or make_session()
     tasks = [(kind, b) for kind in FETCHERS for b in companies.get(kind) or []]
     res = FetchResult()
@@ -65,34 +67,20 @@ def fetch_all(companies: dict, session=None, workers: int = 6, use_adzuna: bool 
                 res.errors.append(msg)
                 log.warning(msg)
 
-    az = companies.get("adzuna") or {}
-    if use_adzuna and az.get("queries"):
-        try:
-            jobs = fetch_adzuna(session, az["queries"], az.get("max_days_old", 14),
-                                az.get("pages_per_query", 2))
-            res.jobs.extend(jobs)
-            res.boards_ok += 1
-            log.info("%-40s %4d postings", "Adzuna (search)", len(jobs))
-        except Exception as e:
-            res.errors.append(f"Adzuna: {str(e)[:160]}")
-            log.warning("Adzuna: %s", e)
     return res
 
 
 def dedupe(jobs: list[Job]) -> list[Job]:
-    """Keep one job per key; prefer a direct company source over the Adzuna redirect."""
-    def rank(j: Job):
-        return (j.source != "adzuna", j.score)
-
+    """Keep one job per key (same company + title + city), highest score wins."""
     best: dict[str, Job] = {}
     for j in jobs:
         cur = best.get(j.key)
-        if cur is None or rank(j) > rank(cur):
+        if cur is None or j.score > cur.score:
             best[j.key] = j
     return list(best.values())
 
 
-def run(root: Path, today: date | None = None, session=None, use_adzuna: bool = True,
+def run(root: Path, today: date | None = None, session=None,
         dry_run: bool = False) -> dict:
     today = today or date.today()
     p = Paths(root)
@@ -100,7 +88,7 @@ def run(root: Path, today: date | None = None, session=None, use_adzuna: bool = 
     jf = JobFilter(yaml.safe_load(p.filters.read_text()), today=today)
     applied = load_applied(p.applied)
 
-    fetched = fetch_all(companies, session=session, use_adzuna=use_adzuna)
+    fetched = fetch_all(companies, session=session)
     kept = [j for j in fetched.jobs if jf.evaluate(j)]
     skipped_applied = [j for j in kept if already_applied(j, applied)]
     skip_ids = {id(j) for j in skipped_applied}
@@ -121,6 +109,7 @@ def run(root: Path, today: date | None = None, session=None, use_adzuna: bool = 
         store.prune(today)
         store.save()
         write_outputs(p.output, kept, new, first_seen, fetched.errors, today, stats)
+        write_readme(p.readme, store.data, today)
     log.info("Done: %s", stats)
     return {"stats": stats, "new": new, "all": kept, "errors": fetched.errors}
 

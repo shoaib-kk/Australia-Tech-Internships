@@ -12,7 +12,7 @@ def _norm(text: str) -> str:
 
 @dataclass
 class Job:
-    source: str            # greenhouse | lever | ashby | smartrecruiters | workday | adzuna
+    source: str            # greenhouse | lever | ashby | smartrecruiters | workday
     source_id: str         # id inside that source
     company: str
     title: str

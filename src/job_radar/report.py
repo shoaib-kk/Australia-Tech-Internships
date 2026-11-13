@@ -78,3 +78,42 @@ def render_markdown(new_jobs, all_jobs, errors, today, stats) -> str:
         out += ["", "## Boards that failed this run", ""] + [f"- {e}" for e in errors]
     out.append("")
     return "\n".join(out)
+
+
+def _cell(text) -> str:
+    return str(text or "").replace("|", "/").replace(chr(10), " ").strip()
+
+
+def render_readme(roles: dict, today: date) -> str:
+    """All roles found this year, still-open ones first. Rebuilt every run."""
+    stamp = today.isoformat()
+    entries = list(roles.values())
+    open_ = sorted((e for e in entries if e.get("last_seen") == stamp),
+                   key=lambda e: (-float(e.get("score") or 0), e["company"].lower()))
+    closed = sorted((e for e in entries if e.get("last_seen") != stamp),
+                    key=lambda e: (e.get("last_seen", ""), e["company"].lower()), reverse=True)
+
+    def table(rows, closed_col: bool) -> list[str]:
+        head = "| Company | Role | Category | Location | Found |" + (" Last seen |" if closed_col else "") + " Link |"
+        sep = "|---|---|---|---|---|" + ("---|" if closed_col else "") + "---|"
+        out = [head, sep]
+        for e in rows:
+            link = f"[apply]({e['url']})" if e.get("url") else "-"
+            last = f" {e.get('last_seen', '')} |" if closed_col else ""
+            out.append(f"| {_cell(e['company'])} | {_cell(e['title'])} | {_cell(e.get('category'))} | "
+                       f"{_cell(e.get('location'))[:60]} | {e.get('first_seen', '')} |{last} {link} |")
+        return out
+
+    out = [f"# Tech internships & grad roles in Australia ({today.year})", "",
+           f"Updated {stamp} · {len(open_)} open · {len(closed)} closed. "
+           "Closed roles stay listed until the end of the year.", "",
+           f"## Open now ({len(open_)})", ""]
+    out += table(open_, False) if open_ else ["_None right now._"]
+    out += ["", f"## Closed ({len(closed)})", ""]
+    out += table(closed, True) if closed else ["_None yet._"]
+    out.append("")
+    return chr(10).join(out)
+
+
+def write_readme(path: Path, roles: dict, today: date) -> None:
+    path.write_text(render_readme(roles, today), encoding="utf-8")
