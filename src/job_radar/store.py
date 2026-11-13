@@ -19,7 +19,7 @@ class SeenStore:
 
     def __init__(self, path: Path):
         self.path = path
-        self.data: dict = json.loads(path.read_text()) if path.exists() else {}
+        self.data: dict = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
     def mark(self, jobs: list[Job], today: date) -> list[Job]:
         """Record jobs as seen today; return only those never seen before."""
@@ -28,7 +28,7 @@ class SeenStore:
         for j in jobs:
             details = {"company": j.company, "title": j.title, "location": j.location,
                        "url": j.url, "category": j.category, "score": j.score,
-                       "posted": j.posted}
+                       "posted": j.posted, "closes": j.closes}
             entry = self.data.get(j.key)
             if entry is None:
                 self.data[j.key] = {"first_seen": stamp, "last_seen": stamp, **details}
@@ -47,7 +47,7 @@ class SeenStore:
 
     def save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.write_text(json.dumps(self.data, indent=1, sort_keys=True))
+        self.path.write_text(json.dumps(self.data, indent=1, sort_keys=True), encoding="utf-8")
 
 
 def _norm(s: str) -> str:
@@ -59,7 +59,7 @@ def load_applied(path: Path) -> list[tuple[str, str]]:
     if not path.exists():
         return []
     out = []
-    for line in path.read_text().splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if not line or line.startswith("#"):
             continue

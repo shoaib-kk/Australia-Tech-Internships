@@ -1,10 +1,12 @@
 """CLI:  python -m job_radar run [--dry-run]
         python -m job_radar validate
+        python -m job_radar add-role   (reads an issue form from $ISSUE_BODY)
 """
 from __future__ import annotations
 
 import argparse
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -15,13 +17,25 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="job_radar", description=__doc__)
-    ap.add_argument("command", choices=["run", "validate"])
+    ap.add_argument("command", choices=["run", "validate", "add-role"])
     ap.add_argument("--root", type=Path, default=ROOT, help="project folder (config/, data/, output/)")
     ap.add_argument("--dry-run", action="store_true", help="don't write state or outputs")
     ap.add_argument("-q", "--quiet", action="store_true")
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.WARNING if a.quiet else logging.INFO,
                         format="%(levelname)-7s %(message)s")
+
+    if a.command == "add-role":
+        # Used by .github/workflows/add-role.yml; the issue body arrives in ISSUE_BODY.
+        from .issue_form import append_role, parse_issue
+        try:
+            role = parse_issue(os.environ.get("ISSUE_BODY", ""))
+        except ValueError as e:
+            print(f"::error::{e}")
+            return 1
+        added = append_role(a.root / "config" / "manual_roles.yaml", role)
+        print(f"{'Added' if added else 'Already listed'}: {role['company']} - {role['title']}")
+        return 0
 
     if a.command == "validate":
         bad = 0

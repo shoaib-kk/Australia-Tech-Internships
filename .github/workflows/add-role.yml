@@ -1,0 +1,53 @@
+name: Add role from issue
+
+# Turns an "Add a role" issue form into a pull request that edits
+# config/manual_roles.yaml. Merging the PR re-runs the job list update.
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  pr:
+    if: contains(github.event.issue.labels.*.name, 'new-role')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -e .
+
+      - name: Add role to config/manual_roles.yaml
+        id: add
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: python -m job_radar add-role
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: add-role/issue-${{ github.event.issue.number }}
+          commit-message: "Add role from issue #${{ github.event.issue.number }}"
+          title: "${{ github.event.issue.title }}"
+          body: |
+            Adds the role from #${{ github.event.issue.number }}.
+
+            Closes #${{ github.event.issue.number }}
+          labels: new-role
+
+      - name: Explain a failed submission
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "Thanks! The form couldn't be read automatically (check the link starts with https:// and the closing date looks like 2027-03-31). Edit the issue to try again, or a maintainer will add it by hand."

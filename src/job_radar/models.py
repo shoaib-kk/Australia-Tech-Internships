@@ -12,7 +12,7 @@ def _norm(text: str) -> str:
 
 @dataclass
 class Job:
-    source: str            # greenhouse | lever | ashby | smartrecruiters | workday
+    source: str            # greenhouse | lever | ashby | smartrecruiters | workday | amazon | manual
     source_id: str         # id inside that source
     company: str
     title: str
@@ -21,6 +21,7 @@ class Job:
     posted: str = ""       # ISO date (YYYY-MM-DD) when known
     employment_type: str = ""
     description: str = ""  # plain text, may be truncated
+    closes: str = ""       # ISO date applications close, when known
 
     # filled in by the filter/scoring stage
     category: str = ""

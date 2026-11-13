@@ -31,6 +31,8 @@ class JobFilter:
                      _compile(c["patterns"]) + _compile(cs.get(c["name"]), flags=0))
             for c in cfg["categories"]
         ]
+        self.general_exclude = _compile(cfg.get("general_program_exclude"))
+        self.general_skip = {c.lower() for c in cfg.get("general_program_skip_companies") or []}
         self.loc_keep = _compile(cfg["locations_keep"])
         self.loc_bonus = [(re.compile(p, re.I), float(w))
                           for p, w in (cfg.get("locations_bonus") or {}).items()]
@@ -77,10 +79,21 @@ class JobFilter:
             return False
         if self.too_old(job):
             return False
+        return self.score(job)
 
+    def evaluate_manual(self, job: Job) -> bool:
+        """Hand-added roles were checked by a person: only categorise and score them."""
+        if job.closes and job.closes < self.today.isoformat():
+            return False
+        return self.score(job, manual=True)
+
+    def score(self, job: Job, manual: bool = False) -> bool:
         cat = self.categorise(job)
         if cat is None:
             if not self.cfg.get("keep_general_programs", True):
+                return False
+            if not manual and (job.company.lower() in self.general_skip or any(
+                    p.search(job.title) for p in self.general_exclude)):
                 return False
             job.category, score = "General program", float(self.cfg.get("general_program_weight", 4))
             job.reasons.append("early-career program (check for a tech stream)")

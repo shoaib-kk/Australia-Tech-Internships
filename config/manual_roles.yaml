@@ -1,0 +1,10 @@
+# Roles added by hand, usually through the "Add a role" issue form.
+# They skip the automatic checks, so only add Australian early-career tech roles.
+#
+#   - company: Acme
+#     title: Software Engineering Intern 2027/28
+#     location: Sydney, NSW
+#     url: https://acme.com/careers/123
+#     posted: 2026-11-13      # optional, defaults to the day it was added
+#     closes: 2027-03-31      # optional; the role moves to "Closed" after this date
+roles:

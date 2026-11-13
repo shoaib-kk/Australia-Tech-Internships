@@ -116,6 +116,22 @@ case_sensitive:
 # score them lower. Set to false to drop them.
 keep_general_programs: true
 general_program_weight: 4
+# ...but not when the title says it's a non-tech stream,
+general_program_exclude:
+  - '\b(audit|assurance|tax|taxation|accounting|accountant|bookkeep)'
+  - '\b(sales|marketing|communications|media|journalis)'
+  - '\b(host|hospitality|retail|store|customer (service|support|success)|call cent)'
+  - '\b(controllership|finance|payroll|procurement|operations)\b'
+  - '\b(safety|hse|environment(al)?|sustainability)\b'
+  - '\b(hr|human resources|people (and|&) culture|talent|recruit)'
+  - '\b(legal|law|lawyer|paralegal|clerk)'
+  - '\b(nurs|midwi|pharmac|allied health|clinical|medical)'
+  - '\b(business advisory|private client|wealth|insolvency|corporate finance)'
+# ...or when the employer has no tech streams.
+general_program_skip_companies:
+  - BDO Australia
+  - Easygo
+  - RSM Australia
 
 # Location: keep a role if its location mentions any of these...
 locations_keep:
@@ -133,7 +149,13 @@ locations_keep:
   - 'gold coast'
   - 'geelong'
   - 'newcastle'
-  - '\b(vic|nsw|qld|act|wa|sa|tas|nt)\b'
+  # WA, SA and NT are left out on purpose: "Seattle, WA" and "SA - Riyadh"
+  # are not Australian. Perth/Adelaide/Darwin roles name the city anyway.
+  - '\b(vic|nsw|qld|act|tas)\b'
+  - 'western australia'
+  - 'south australia'
+  - 'northern territory'
+  - 'tasmania'
   - 'victoria'
   - 'new south wales'
   - 'queensland'

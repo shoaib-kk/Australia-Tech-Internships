@@ -7,7 +7,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-USER_AGENT = "job-radar/1.0 (personal job-search tool; github.com/shoaib-kk)"
+USER_AGENT = "Australia-Tech-Internships/1.1 (+https://github.com/shoaib-kk/Australia-Tech-Internships)"
 TIMEOUT = 25
 
 

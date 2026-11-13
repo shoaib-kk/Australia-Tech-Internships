@@ -1,0 +1,24 @@
+name: 🏢 Suggest a company to track
+description: Suggest an employer whose careers site should be checked every day.
+title: "Track company: "
+labels: [company-request]
+body:
+  - type: input
+    id: company
+    attributes:
+      label: Company
+    validations:
+      required: true
+  - type: input
+    id: careers
+    attributes:
+      label: Careers page or any job ad link
+      description: Links that contain greenhouse.io, lever.co, ashbyhq.com, smartrecruiters.com or myworkdayjobs.com can be added straight away.
+      placeholder: https://
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: For example, which programs they run (internships, grad program, cadetships).

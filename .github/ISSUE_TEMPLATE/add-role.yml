@@ -1,0 +1,46 @@
+name: ➕ Add a role
+description: Add an Australian tech internship, vacationer, cadetship or graduate role. A pull request is opened for you.
+title: "Add role: "
+labels: [new-role]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! Only early-career **tech** roles (software, data/AI, cloud, cyber, IT) **based in Australia** please.
+        Once you submit, a bot turns this into a pull request for review.
+  - type: input
+    id: company
+    attributes:
+      label: Company
+      placeholder: Atlassian
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Role title
+      description: Copy it from the job ad.
+      placeholder: Software Engineer Intern, Summer 2027/28
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      placeholder: Sydney, NSW
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Link to apply
+      description: The employer's own page if possible, not a job board.
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: closes
+    attributes:
+      label: Closing date (optional)
+      description: YYYY-MM-DD
+      placeholder: 2027-03-31

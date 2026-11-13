@@ -5,6 +5,7 @@ import html
 import re
 from datetime import datetime, timezone
 
+from .amazon import fetch_amazon
 from .ats import fetch_ashby, fetch_greenhouse, fetch_lever, fetch_smartrecruiters
 from .workday import fetch_workday
 
@@ -14,6 +15,7 @@ FETCHERS = {
     "ashby": fetch_ashby,
     "smartrecruiters": fetch_smartrecruiters,
     "workday": fetch_workday,
+    "amazon": fetch_amazon,
 }
 
 __all__ = ["FETCHERS", "strip_html", "to_date"]

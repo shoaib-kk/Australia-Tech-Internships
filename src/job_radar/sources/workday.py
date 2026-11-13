@@ -7,12 +7,31 @@ low on very large boards (banks, telcos).
 """
 from __future__ import annotations
 
+import re
+from datetime import date, timedelta
+
 from ..http import pause, post_json
 from ..models import Job
 
 DEFAULT_TERMS = ["intern", "graduate", "vacation", "summer", "student", "cadet", "undergraduate"]
 PAGE = 20        # Workday caps page size at 20
 MAX_PAGES = 5    # per search term
+
+
+def posted_date(text: str, today: date | None = None) -> str:
+    """Turn Workday's "Posted Today" / "Posted 3 Days Ago" / "Posted 30+ Days Ago" into a date."""
+    today = today or date.today()
+    t = (text or "").lower()
+    if "today" in t:
+        days = 0
+    elif "yesterday" in t:
+        days = 1
+    else:
+        m = re.search(r"(\d+)\+?\s*days?", t)
+        if not m:
+            return ""
+        days = int(m.group(1))
+    return (today - timedelta(days=days)).isoformat()
 
 
 def fetch_workday(session, board: dict) -> list[Job]:
@@ -40,9 +59,9 @@ def fetch_workday(session, board: dict) -> list[Job]:
                     title=p.get("title", ""),
                     location=p.get("locationsText", ""),
                     url=f"{host}/en-US/{site}{path}",
-                    # Workday only gives relative text like "Posted 3 Days Ago"
-                    posted="",
-                    employment_type=p.get("postedOn", ""),
+                    # Workday only gives relative text like "Posted 3 Days Ago";
+                    # "30+ Days Ago" becomes 30 days, so old ads still pass the age filter.
+                    posted=posted_date(p.get("postedOn", "")),
                 ))
             if len(postings) < PAGE or (page + 1) * PAGE >= data.get("total", 0):
                 break

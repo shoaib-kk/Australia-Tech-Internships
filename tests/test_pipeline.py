@@ -136,7 +136,7 @@ def test_applied_list_excludes(project):
 
 
 def test_scoring_prefers_data_roles_in_melbourne():
-    cfg = yaml.safe_load((ROOT / "config" / "filters.yaml").read_text())
+    cfg = yaml.safe_load((ROOT / "config" / "filters.yaml").read_text(encoding="utf-8"))
     f = JobFilter(cfg, today=TODAY)
     data = Job("x", "1", "A", "Data Science Intern", "Melbourne, VIC", "u", posted="2026-11-14",
                description="python sql machine learning")
@@ -151,16 +151,45 @@ def test_scoring_prefers_data_roles_in_melbourne():
     assert it_lower.category == "General program"  # lowercase "it" is not "IT"
 
 
-@pytest.mark.parametrize("title", ["Senior Software Engineer Intern Mentor", "Internal Auditor",
-                                   "Engineering Manager, Graduates", "International Sales Graduate"])
-def test_rejects(title):
-    cfg = yaml.safe_load((ROOT / "config" / "filters.yaml").read_text())
-    j = Job("x", "1", "A", title, "Melbourne", "u")
-    ok = JobFilter(cfg, today=TODAY).evaluate(j)
-    if title == "International Sales Graduate":
-        assert ok and j.category == "General program"  # kept but scored low
-    else:
-        assert not ok
+@pytest.mark.parametrize("title,company", [
+    ("Senior Software Engineer Intern Mentor", "A"), ("Internal Auditor", "A"),
+    ("Engineering Manager, Graduates", "A"), ("International Sales Graduate", "A"),
+    ("Junior VIP Host - English Speaking", "A"), ("Audit & Assurance Vacationer", "A"),
+    ("Graduate Program - Melbourne", "BDO Australia"),
+])
+def test_rejects(title, company):
+    cfg = yaml.safe_load((ROOT / "config" / "filters.yaml").read_text(encoding="utf-8"))
+    j = Job("x", "1", company, title, "Melbourne", "u")
+    assert not JobFilter(cfg, today=TODAY).evaluate(j)
+
+
+def test_general_program_kept_when_no_stream_named():
+    cfg = yaml.safe_load((ROOT / "config" / "filters.yaml").read_text(encoding="utf-8"))
+    j = Job("x", "1", "CommBank", "2027 CommBank Graduate Campaign", "Sydney", "u")
+    assert JobFilter(cfg, today=TODAY).evaluate(j) and j.category == "General program"
+
+
+def test_workday_relative_dates():
+    from job_radar.sources.workday import posted_date
+    assert posted_date("Posted Today", TODAY) == "2026-11-15"
+    assert posted_date("Posted Yesterday", TODAY) == "2026-11-14"
+    assert posted_date("Posted 3 Days Ago", TODAY) == "2026-11-12"
+    assert posted_date("Posted 30+ Days Ago", TODAY) == "2026-10-16"
+    assert posted_date("", TODAY) == ""
+
+
+def test_manual_roles_listed_until_closing_date(project):
+    (project / "config" / "manual_roles.yaml").write_text(yaml.safe_dump({"roles": [
+        {"company": "Acme", "title": "Data Science Intern 2027", "location": "Melbourne, VIC",
+         "url": "https://acme/1", "closes": "2026-11-20"},
+    ]}), encoding="utf-8")
+    res = run(project, today=TODAY, session=FakeSession())
+    acme = next(j for j in res["all"] if j.company == "Acme")
+    assert acme.category == "Data / ML / AI"
+    assert "https://acme/1" in (project / "README.md").read_text(encoding="utf-8").split("<details>")[0]
+    res = run(project, today=date(2026, 11, 21), session=FakeSession())
+    assert not any(j.company == "Acme" for j in res["all"])
+    assert "Acme" in (project / "README.md").read_text(encoding="utf-8").split("<details>")[1]
 
 
 class ClosingSession(FakeSession):
@@ -174,13 +203,51 @@ class ClosingSession(FakeSession):
 def test_readme_keeps_closed_roles_until_year_end(project):
     run(project, today=TODAY, session=FakeSession())
     run(project, today=date(2026, 11, 22), session=ClosingSession())
-    readme = (project / "README.md").read_text()
-    open_part, closed_part = readme.split("## Closed")
+    readme = (project / "README.md").read_text(encoding="utf-8")
+    open_part, closed_part = readme.split("<details>")
     assert "KPMG Vacationer" in closed_part and "KPMG Vacationer" not in open_part
     assert "Graduate Software Developer" in open_part and "https://lever/a" in open_part
 
     # new year: the closed KPMG role is dropped, roles still open stay
     run(project, today=date(2027, 1, 3), session=ClosingSession())
-    readme = (project / "README.md").read_text()
+    readme = (project / "README.md").read_text(encoding="utf-8")
     assert "KPMG Vacationer" not in readme
     assert "Graduate Software Developer" in readme
+
+
+ISSUE_BODY = """### Company
+
+Acme | Labs
+
+### Role title
+
+Software Engineer Intern "2027"
+
+### Location
+
+Sydney, NSW
+
+### Link to apply
+
+https://acme.com/jobs/1
+
+### Closing date (optional)
+
+_No response_
+"""
+
+
+def test_issue_form_becomes_manual_role(tmp_path):
+    from job_radar.issue_form import append_role, parse_issue
+    path = tmp_path / "manual_roles.yaml"
+    path.write_text("# comment\nroles:\n", encoding="utf-8")
+    role = parse_issue(ISSUE_BODY)
+    assert role["company"] == "Acme | Labs" and role["closes"] == ""
+    assert append_role(path, role, today=TODAY)
+    assert not append_role(path, role, today=TODAY)  # same link twice is ignored
+    roles = yaml.safe_load(path.read_text(encoding="utf-8"))["roles"]
+    assert roles == [{"company": "Acme | Labs", "title": 'Software Engineer Intern "2027"',
+                      "location": "Sydney, NSW", "url": "https://acme.com/jobs/1",
+                      "posted": date(2026, 11, 15)}]
+    with pytest.raises(ValueError):
+        parse_issue(ISSUE_BODY.replace("https://acme.com/jobs/1", "not a link"))

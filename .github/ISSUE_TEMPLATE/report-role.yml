@@ -1,0 +1,29 @@
+name: 🚩 Report a wrong or closed role
+description: A listing is closed, broken, not in Australia, or not a tech role.
+title: "Report: "
+labels: [report]
+body:
+  - type: input
+    id: role
+    attributes:
+      label: Company and role
+      placeholder: Acme - Graduate Software Engineer
+    validations:
+      required: true
+  - type: dropdown
+    id: problem
+    attributes:
+      label: What's wrong?
+      options:
+        - Applications have closed
+        - Link is broken
+        - Not based in Australia
+        - Not a tech role
+        - Not early-career
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details (optional)

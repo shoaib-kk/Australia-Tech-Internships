@@ -6,17 +6,39 @@
 #   ashby:            jobs.ashbyhq.com/<id>
 #   smartrecruiters:  jobs.smartrecruiters.com/<id>
 #   workday:          <tenant>.<wd>.myworkdayjobs.com/<site>
+#   amazon:           amazon.jobs (Amazon and AWS)
 #
 # To add a company, find any of its job ads, look at the URL, and add a line.
 # Run `python -m job_radar validate` to check every board still responds.
+# Big global boards are fine: only Australian early-career tech roles are kept.
 
 greenhouse:
+  # Australian tech
   - {id: australianenergymarketoperator, name: AEMO}
-  - {id: cloudflare, name: Cloudflare}
-  - {id: imc, name: IMC Trading}
-  - {id: easygo, name: Easygo}
+  - {id: cultureamp, name: Culture Amp}
+  - {id: quantium, name: Quantium}
   - {id: eucalyptus, name: Eucalyptus}
   - {id: prezzee, name: Prezzee}
+  - {id: octopusdeploy, name: Octopus Deploy}
+  - {id: easygo, name: Easygo}
+  # Quant and trading firms with Sydney offices
+  - {id: optiverus, name: Optiver}
+  - {id: imc, name: IMC Trading}
+  - {id: towerresearchcapital, name: Tower Research Capital}
+  - {id: akunacapital, name: Akuna Capital}
+  - {id: jumptrading, name: Jump Trading}
+  # Global tech with Australian offices
+  - {id: cloudflare, name: Cloudflare}
+  - {id: block, name: Block (Afterpay, Square)}
+  - {id: stripe, name: Stripe}
+  - {id: datadog, name: Datadog}
+  - {id: databricks, name: Databricks}
+  - {id: mongodb, name: MongoDB}
+  - {id: okta, name: Okta}
+  - {id: gitlab, name: GitLab}
+  - {id: elastic, name: Elastic}
+  - {id: figma, name: Figma}
+  - {id: anthropic, name: Anthropic}
   - {id: andurilindustries, name: Anduril}
 
 lever:
@@ -24,22 +46,38 @@ lever:
   - {id: megaport, name: Megaport}
   - {id: palantir, name: Palantir}
   - {id: recordpoint, name: RecordPoint}
+  - {id: immutable, name: Immutable}
+  - {id: brighte, name: Brighte}
   - {id: binance, name: Binance}
 
 ashby:
   - {id: airwallex, name: Airwallex}
   - {id: xero, name: Xero}
   - {id: heidihealth.com.au, name: Heidi Health}
+  - {id: harrison.ai, name: harrison.ai}
+  - {id: lorikeet, name: Lorikeet}
+  - {id: relevanceai, name: Relevance AI}
+  - {id: linear, name: Linear}
+  - {id: openai, name: OpenAI}
 
 smartrecruiters:
   - {id: KPMGAustralia1, name: KPMG Australia}
   - {id: NCSAustralia, name: NCS Australia}
-  - {id: Nine, name: Nine}
+  - {id: Canva, name: Canva}
+  - {id: ServiceNow, name: ServiceNow, country: au}
+  - {id: Experian, name: Experian, country: au}
 
 workday:
   - {tenant: cba, wd: wd3, site: CommBank_Careers, name: CommBank}
+  # CommBank posts its intern and grad campaigns on a separate site
+  - {tenant: cba, wd: wd3, site: private_ad, name: CommBank}
   - {tenant: nbn, wd: wd3, site: nbncareers, name: nbn}
   - {tenant: telstra, wd: wd3, site: Telstra_Careers, name: Telstra}
-  - {tenant: bdoau, wd: wd105, site: BDOEarlyCareers, name: BDO Australia}
+  - {tenant: rba, wd: wd105, site: RBA_Careers, name: Reserve Bank of Australia}
   - {tenant: dxctechnology, wd: wd1, site: DXCJobs, name: DXC Technology}
   - {tenant: motorolasolutions, wd: wd5, site: Careers, name: Motorola Solutions}
+  - {tenant: visa, wd: wd5, site: Visa_Early_Careers, name: Visa}
+  - {tenant: bdoau, wd: wd105, site: BDOEarlyCareers, name: BDO Australia}
+
+amazon:
+  - {name: Amazon (incl. AWS)}
