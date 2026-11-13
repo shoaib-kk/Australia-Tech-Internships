@@ -1,6 +1,7 @@
 {
  "6e7a31f1050fdc7b": {
   "category": "General program",
+  "closes": "",
   "company": "AEMO",
   "first_seen": "2026-11-13",
   "last_seen": "2026-11-13",
@@ -12,6 +13,7 @@
  },
  "81e2b363800492bc": {
   "category": "Software engineering",
+  "closes": "",
   "company": "RecordPoint",
   "first_seen": "2026-11-13",
   "last_seen": "2026-11-13",
@@ -21,13 +23,26 @@
   "title": "Graduate Software Engineer",
   "url": "https://jobs.lever.co/recordpoint/65811c7e-96fc-4c9f-aca9-05a935f3e971"
  },
+ "9489e9a72e3b07b0": {
+  "category": "IT / Tech",
+  "closes": "",
+  "company": "Lorikeet",
+  "first_seen": "2026-11-13",
+  "last_seen": "2026-11-13",
+  "location": "Sydney, Australia HQ",
+  "posted": "2026-10-23",
+  "score": 9.0,
+  "title": "Forward Deployed Engineer Intern",
+  "url": "https://jobs.ashbyhq.com/Lorikeet/62f54845-4529-4562-aa9b-24a95c46b0c0"
+ },
  "bd567dda4999d5dc": {
   "category": "IT / Tech",
+  "closes": "",
   "company": "Motorola Solutions",
   "first_seen": "2026-11-13",
   "last_seen": "2026-11-13",
   "location": "Melbourne, Australia",
-  "posted": "",
+  "posted": "2026-10-14",
   "score": 10.0,
   "title": "Graduate Engineer",
   "url": "https://motorolasolutions.wd5.myworkdayjobs.com/en-US/Careers/job/Melbourne-Australia/Graduate-Engineer_R68934"
