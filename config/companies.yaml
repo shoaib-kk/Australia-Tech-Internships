@@ -1,0 +1,63 @@
+# Company job boards to check. Each entry needs the ATS type and that
+# company's board ID (the bit in their careers URL):
+#
+#   greenhouse:       job-boards.greenhouse.io/<id>
+#   lever:            jobs.lever.co/<id>
+#   ashby:            jobs.ashbyhq.com/<id>
+#   smartrecruiters:  jobs.smartrecruiters.com/<id>
+#   workday:          <tenant>.<wd>.myworkdayjobs.com/<site>
+#
+# To add a company, find any of its job ads, look at the URL, and add a line.
+# Run `python -m job_radar validate` to check every board still responds.
+
+greenhouse:
+  - {id: australianenergymarketoperator, name: AEMO}
+  - {id: cloudflare, name: Cloudflare}
+  - {id: imc, name: IMC Trading}
+  - {id: easygo, name: Easygo}
+  - {id: eucalyptus, name: Eucalyptus}
+  - {id: prezzee, name: Prezzee}
+  - {id: andurilindustries, name: Anduril}
+
+lever:
+  - {id: deputy, name: Deputy}
+  - {id: megaport, name: Megaport}
+  - {id: palantir, name: Palantir}
+  - {id: recordpoint, name: RecordPoint}
+  - {id: binance, name: Binance}
+
+ashby:
+  - {id: airwallex, name: Airwallex}
+  - {id: xero, name: Xero}
+  - {id: heidihealth.com.au, name: Heidi Health}
+
+smartrecruiters:
+  - {id: KPMGAustralia1, name: KPMG Australia}
+  - {id: NCSAustralia, name: NCS Australia}
+  - {id: Nine, name: Nine}
+
+workday:
+  - {tenant: cba, wd: wd3, site: CommBank_Careers, name: CommBank}
+  - {tenant: nbn, wd: wd3, site: nbncareers, name: nbn}
+  - {tenant: telstra, wd: wd3, site: Telstra_Careers, name: Telstra}
+  - {tenant: bdoau, wd: wd105, site: BDOEarlyCareers, name: BDO Australia}
+  - {tenant: dxctechnology, wd: wd1, site: DXCJobs, name: DXC Technology}
+  - {tenant: motorolasolutions, wd: wd5, site: Careers, name: Motorola Solutions}
+
+# Adzuna keyword searches across all of Australia (needs a free API key).
+adzuna:
+  max_days_old: 14
+  pages_per_query: 2
+  queries:
+    - software engineer intern
+    - software developer graduate
+    - data science intern
+    - data analyst graduate
+    - machine learning intern
+    - AI intern
+    - IT graduate program
+    - cyber security graduate
+    - cloud engineer graduate
+    - technology internship
+    - vacation program technology
+    - summer internship data

@@ -1,0 +1,56 @@
+name: Weekly job radar
+
+on:
+  schedule:
+    # Sundays 05:00 UTC = 4pm Melbourne (AEDT) / 3pm (AEST).
+    # Runs ~1.5h before the Claude scheduled task that reads the results.
+    - cron: "0 5 * * 0"
+  workflow_dispatch: {}   # "Run workflow" button for manual runs
+
+permissions:
+  contents: write
+
+concurrency:
+  group: job-radar
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Test
+        run: pytest -q
+
+      - name: Run pipeline
+        env:
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+        run: python -m job_radar run
+
+      - name: Commit results
+        run: |
+          git config user.name  "job-radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/ data/seen.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Weekly openings $(date -u +%F)"
+            git push
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          [ -f output/new_this_week.md ] && cat output/new_this_week.md >> "$GITHUB_STEP_SUMMARY" || true

@@ -1,0 +1,162 @@
+# What counts as a match. Edit freely - patterns are case-insensitive regex
+# unless listed under `case_sensitive`.
+
+# A role must look early-career...
+early_career:
+  - '\bintern(s|ship|ships)?\b'
+  - '\bvacation(er|al)?\b'
+  - '\bsummer (program|clerk|associate|analyst|student)'
+  - '\bwinter (program|intern|student)'
+  - '\bgraduate\b'
+  - '\bgrad\b'
+  - '\bnew grad'
+  - '\bco-?op\b'
+  - '\bcadet(ship)?\b'
+  - '\bplacement\b'
+  - '\bstudent\b'
+  - '\bentry[- ]level\b'
+  - '\bjunior\b'
+  - '\bearly careers?\b'
+  - '\bundergrad(uate)?\b'
+  - '\b(2027|2028) program'
+
+# ...and not senior.
+exclude_titles:
+  - '\bsenior\b'
+  - '\bsnr\.?\b'
+  - '\bsr\.?\b'
+  - '\blead\b'
+  - '\bprincipal\b'
+  - '\bstaff\b'
+  - '\bmanager\b'
+  - '\bhead of\b'
+  - '\bdirector\b'
+  - '\bexperienced\b'
+  - '\barchitect\b'
+  - '\bgraduate (teacher|nurse|lawyer|accountant)\b'
+  - '\bpostgraduate research\b'
+  - '\bphd\b'
+
+# Tech categories, checked in order; first match wins. Weight feeds the score.
+categories:
+  - name: Data / ML / AI
+    weight: 10
+    patterns:
+      - '\bdata\b'
+      - '\banalytics?\b'
+      - '\bmachine learning\b'
+      - '\bdeep learning\b'
+      - '\bartificial intelligence\b'
+      - '\bnlp\b'
+      - '\bcomputer vision\b'
+      - '\bstatistic'
+      - '\bquant(itative)?\b'
+      - '\bactuar'
+      - '\binsights?\b'
+      - '\bbusiness intelligence\b'
+      - '\bresearch engineer\b'
+  - name: Software engineering
+    weight: 9
+    patterns:
+      - '\bsoftware\b'
+      - '\bdeveloper\b'
+      - '\bdevelopment engineer\b'
+      - '\bprogrammer\b'
+      - '\b(full[- ]?stack|front[- ]?end|back[- ]?end|mobile|web|ios|android)\b'
+      - '\bsde\b'
+      - '\bswe\b'
+      - '\bengineering intern'
+  - name: Cloud / DevOps / Infra
+    weight: 8
+    patterns:
+      - '\bcloud\b'
+      - '\bdevops\b'
+      - '\bsre\b'
+      - '\bsite reliability\b'
+      - '\bplatform\b'
+      - '\binfrastructure\b'
+      - '\bnetwork'
+      - '\bsystems? (engineer|administrator|analyst)\b'
+  - name: Cyber security
+    weight: 8
+    patterns:
+      - '\bcyber'
+      - '\bsecurity\b'
+      - '\binfosec\b'
+      - '\bpenetration\b'
+  - name: IT / Tech
+    weight: 7
+    patterns:
+      - '\binformation technology\b'
+      - '\btechnology\b'
+      - '\btech\b'
+      - '\bdigital\b'
+      - '\bit (support|graduate|intern|analyst|cadet)'
+      - '\bservice ?desk\b'
+      - '\bqa\b'
+      - '\btest(ing|er)?\b'
+      - '\bautomation\b'
+      - '\bsolutions? engineer'
+      - '\bproduct (analyst|intern|manag)'
+      - '\bux\b'
+      - '\bengineer(ing)?\b'
+
+# Short all-caps words that must match exactly (e.g. "IT" but not "it").
+case_sensitive:
+  IT / Tech:
+    - '\bIT\b'
+    - '\bICT\b'
+  Data / ML / AI:
+    - '\bAI\b'
+    - '\bML\b'
+    - '\bBI\b'
+
+# Broad graduate / intern programs with no tech word in the title (e.g.
+# "2027 CommBank Graduate Campaign") often have tech streams. Keep them, but
+# score them lower. Set to false to drop them.
+keep_general_programs: true
+general_program_weight: 4
+
+# Location: keep a role if its location mentions any of these...
+locations_keep:
+  - 'australia'
+  - '\bau\b'
+  - '\baus\b'
+  - 'melbourne'
+  - 'sydney'
+  - 'brisbane'
+  - 'canberra'
+  - 'perth'
+  - 'adelaide'
+  - 'hobart'
+  - 'darwin'
+  - 'gold coast'
+  - 'geelong'
+  - 'newcastle'
+  - '\b(vic|nsw|qld|act|wa|sa|tas|nt)\b'
+  - 'victoria'
+  - 'new south wales'
+  - 'queensland'
+# Bonus points for these (your home city first).
+locations_bonus:
+  melbourne: 3
+  victoria: 2
+  '\bvic\b': 2
+  remote: 1
+  flexible: 1
+# Remote roles with no country at all ("Remote", "Anywhere") - keep?
+keep_global_remote: false
+
+# Extra score when these appear in the title or description.
+skill_bonus:
+  python: 1
+  sql: 1
+  '\br\b': 0.5
+  machine learning: 1
+  pandas: 0.5
+  statistics: 0.5
+  data science: 1.5
+  forecasting: 0.5
+
+# Drop postings older than this many days when a posted date is known.
+max_age_days: 60
