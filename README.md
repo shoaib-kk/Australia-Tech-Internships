@@ -1,49 +1,21 @@
-# job-radar
+# Tech internships & grad roles in Australia (2026)
 
-A weekly pipeline that finds **tech internships, vacation programs and graduate roles in Australia** — software, data/ML/AI, cloud, cyber, IT — and reports only what's new since last week.
+Updated 2026-11-13 · 9 open · 0 closed. Closed roles stay listed until the end of the year.
 
-It reads structured data from sources built for this purpose rather than scraping job-board HTML:
+## Open now (9)
 
-| Source | What it is | Auth |
-|---|---|---|
-| Greenhouse, Lever, Ashby, SmartRecruiters | Public job-board APIs that applicant-tracking systems publish for each employer | none |
-| Workday | The JSON search endpoint behind every `*.myworkdayjobs.com` careers site | none |
-| [Adzuna](https://developer.adzuna.com) | Job-search API aggregating listings from many Australian boards | free key |
+| Company | Role | Category | Location | Found | Link |
+|---|---|---|---|---|---|
+| RecordPoint | Graduate Software Engineer | Software engineering | Sydney, NSW, Australia / Melbourne, VIC, Australia | 2026-11-13 | [apply](https://jobs.lever.co/recordpoint/65811c7e-96fc-4c9f-aca9-05a935f3e971) |
+| Motorola Solutions | Graduate Engineer | IT / Tech | Melbourne, Australia | 2026-11-13 | [apply](https://motorolasolutions.wd5.myworkdayjobs.com/en-US/Careers/job/Melbourne-Australia/Graduate-Engineer_R68934) |
+| AEMO | Expression of Interest - 2027/28 AEMO Internships | General program | Adelaide, South Australia, Australia; Brisbane, Queensland,  | 2026-11-13 | [apply](https://job-boards.greenhouse.io/australianenergymarketoperator/jobs/4414221009) |
+| BDO Australia | Graduate Program - Melbourne | General program | Melbourne, Victoria | 2026-11-13 | [apply](https://bdoau.wd105.myworkdayjobs.com/en-US/BDOEarlyCareers/job/Melbourne-Victoria/Graduate-Program---Melbourne_JR102561) |
+| Easygo | Junior VIP Host - English Speaking | General program | Melbourne, Australia | 2026-11-13 | [apply](https://job-boards.greenhouse.io/easygo/jobs/5274723007) |
+| BDO Australia | Vacation Program - Canberra | General program | Canberra, Australian Capital Territory | 2026-11-13 | [apply](https://bdoau.wd105.myworkdayjobs.com/en-US/BDOEarlyCareers/job/Canberra-Australian-Capital-Territory/Vacation-Program---Canberra_JR102574) |
+| BDO Australia | Undergraduate Program - Adelaide | General program | Adelaide, South Australia | 2026-11-13 | [apply](https://bdoau.wd105.myworkdayjobs.com/en-US/BDOEarlyCareers/job/Adelaide-South-Australia/Undergraduate-Program---Adelaide_JR102623) |
+| BDO Australia | Graduate Program - Sydney | General program | Sydney, New South Wales | 2026-11-13 | [apply](https://bdoau.wd105.myworkdayjobs.com/en-US/BDOEarlyCareers/job/Sydney-New-South-Wales/Graduate-Program---Sydney_JR102570) |
+| BDO Australia | Undergraduate & Graduate Pathways / Advisory | General program | Cairns, Queensland | 2026-11-13 | [apply](https://bdoau.wd105.myworkdayjobs.com/en-US/BDOEarlyCareers/job/Cairns-Queensland/Undergraduate---Graduate-Pathways---Advisory_JR104113) |
 
-## Pipeline
+## Closed (0)
 
-```
-fetch (parallel, per board)  ->  filter  ->  score  ->  dedupe  ->  diff vs last run  ->  outputs
-```
-
-- **Filter** (`config/filters.yaml`): early-career title (intern, vacationer, graduate, cadet, junior…), not senior, Australian location, posted within 60 days.
-- **Categorise and score**: Data/ML/AI > Software > Cloud/Infra ≈ Cyber > IT/Tech > general grad programs. Bonuses for internships, Melbourne/VIC, skills mentioned (Python, SQL, ML…) and postings from this week.
-- **Dedupe**: same company + title + city counts as one role, preferring the direct company link over an Adzuna redirect.
-- **Diff**: `data/seen.json` remembers what has been reported before, so `new_this_week.md` only shows new roles.
-- **Fault tolerant**: a board that errors is logged and listed in the report without stopping the run.
-
-## Outputs (`output/`)
-
-- `new_this_week.md`: digest of new roles plus the top roles that are still open
-- `openings.csv`: every matching open role, sorted by score
-- `openings.json`: the same data plus run stats and errors, for other tools to read
-
-## Usage
-
-```bash
-pip install -e ".[dev]"
-pytest                                # offline tests with mocked APIs
-python -m job_radar validate          # check every configured board responds
-python -m job_radar run               # full run (set ADZUNA_APP_ID / ADZUNA_APP_KEY for Adzuna)
-python -m job_radar run --no-adzuna --dry-run
-```
-
-## Configuration
-
-- `config/companies.yaml`: employers to check. To add one, open any of its job ads and copy the board ID from the URL (format notes are at the top of the file).
-- `config/filters.yaml`: keywords, categories, weights and locations.
-- `config/applied.csv`: roles you've already applied to, which are left out of the results.
-
-## Automation
-
-`.github/workflows/weekly.yml` runs every Sunday at 05:00 UTC on GitHub Actions. It runs the tests, then the pipeline, and commits `output/` and `data/seen.json` back to the repo. You can also start it from the Actions tab with **Run workflow**.
+_None yet._

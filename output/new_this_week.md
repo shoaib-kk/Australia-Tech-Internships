@@ -1,10 +1,12 @@
 # Tech internship & grad openings - 2026-11-13
 
-**9 new** this run · 9 matching roles open in total · 4805 postings scanned from 24 boards.
-
-New by category: General program 7, Software engineering 1, IT / Tech 1
+**0 new** this run · 9 matching roles open in total · 4807 postings scanned from 24 boards.
 
 ## New since last run
+
+_Nothing new this week._
+
+## Still open (top 30 by score)
 
 | Score | Company | Role | Category | Location | Posted | Link |
 |---:|---|---|---|---|---|---|
@@ -17,11 +19,3 @@ New by category: General program 7, Software engineering 1, IT / Tech 1
 | 4 | BDO Australia | Undergraduate Program - Adelaide | General program | Adelaide, South Australia | - | [apply](https://bdoau.wd105.myworkdayjobs.com/en-US/BDOEarlyCareers/job/Adelaide-South-Australia/Undergraduate-Program---Adelaide_JR102623) |
 | 4 | BDO Australia | Graduate Program - Sydney | General program | Sydney, New South Wales | - | [apply](https://bdoau.wd105.myworkdayjobs.com/en-US/BDOEarlyCareers/job/Sydney-New-South-Wales/Graduate-Program---Sydney_JR102570) |
 | 4 | BDO Australia | Undergraduate & Graduate Pathways / Advisory | General program | Cairns, Queensland | - | [apply](https://bdoau.wd105.myworkdayjobs.com/en-US/BDOEarlyCareers/job/Cairns-Queensland/Undergraduate---Graduate-Pathways---Advisory_JR104113) |
-
-## Still open (top 30 by score)
-
-_None._
-
-## Boards that failed this run
-
-- Adzuna: ADZUNA_APP_ID / ADZUNA_APP_KEY not set - skipping Adzuna
