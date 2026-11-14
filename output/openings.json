@@ -1,15 +1,19 @@
 {
- "generated": "2026-11-13",
+ "generated": "2026-11-14",
  "stats": {
-  "fetched": 10763,
-  "boards_ok": 54,
-  "boards_failed": 0,
-  "matched": 4,
-  "new": 1,
-  "new_this_week": 4,
+  "fetched": 10503,
+  "boards_ok": 51,
+  "boards_failed": 3,
+  "matched": 3,
+  "new": 0,
+  "new_this_week": 3,
   "skipped_already_applied": 0
  },
- "errors": [],
+ "errors": [
+  "DXC Technology (workday): JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "Motorola Solutions (workday): JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "Visa (workday): JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+ ],
  "new": [
   {
    "score": 12.0,
@@ -25,21 +29,6 @@
    "reasons": "software engineering; location: melbourne",
    "key": "81e2b363800492bc",
    "source_id": "65811c7e-96fc-4c9f-aca9-05a935f3e971"
-  },
-  {
-   "score": 10.0,
-   "category": "IT / Tech",
-   "company": "Motorola Solutions",
-   "title": "Graduate Engineer",
-   "location": "Melbourne, Australia",
-   "posted": "2026-10-14",
-   "first_seen": "2026-11-13",
-   "employment_type": "",
-   "source": "workday",
-   "url": "https://motorolasolutions.wd5.myworkdayjobs.com/en-US/Careers/job/Melbourne-Australia/Graduate-Engineer_R68934",
-   "reasons": "it / tech; location: melbourne",
-   "key": "bd567dda4999d5dc",
-   "source_id": "R68934"
   },
   {
    "score": 9.0,
@@ -87,21 +76,6 @@
    "reasons": "software engineering; location: melbourne",
    "key": "81e2b363800492bc",
    "source_id": "65811c7e-96fc-4c9f-aca9-05a935f3e971"
-  },
-  {
-   "score": 10.0,
-   "category": "IT / Tech",
-   "company": "Motorola Solutions",
-   "title": "Graduate Engineer",
-   "location": "Melbourne, Australia",
-   "posted": "2026-10-14",
-   "first_seen": "2026-11-13",
-   "employment_type": "",
-   "source": "workday",
-   "url": "https://motorolasolutions.wd5.myworkdayjobs.com/en-US/Careers/job/Melbourne-Australia/Graduate-Engineer_R68934",
-   "reasons": "it / tech; location: melbourne",
-   "key": "bd567dda4999d5dc",
-   "source_id": "R68934"
   },
   {
    "score": 9.0,
