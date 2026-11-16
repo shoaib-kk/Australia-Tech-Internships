@@ -1,46 +1,26 @@
 {
- "generated": "2026-11-15",
+ "generated": "2026-11-16",
  "stats": {
-  "fetched": 10774,
-  "boards_ok": 54,
-  "boards_failed": 0,
-  "matched": 4,
+  "fetched": 10365,
+  "boards_ok": 45,
+  "boards_failed": 9,
+  "matched": 2,
   "new": 0,
-  "new_this_week": 4,
+  "new_this_week": 2,
   "skipped_already_applied": 0
  },
- "errors": [],
+ "errors": [
+  "DXC Technology (workday): RetryError: HTTPSConnectionPool(host='dxctechnology.wd1.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/dxct",
+  "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/CommBank_C",
+  "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/private_ad",
+  "Telstra (workday): RetryError: HTTPSConnectionPool(host='telstra.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/telstra/Te",
+  "nbn (workday): RetryError: HTTPSConnectionPool(host='nbn.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/nbn/nbncareers",
+  "Reserve Bank of Australia (workday): RetryError: HTTPSConnectionPool(host='rba.wd105.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/rba/RBA_Care",
+  "Motorola Solutions (workday): RetryError: HTTPSConnectionPool(host='motorolasolutions.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/",
+  "Visa (workday): RetryError: HTTPSConnectionPool(host='visa.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/visa/Visa_Ear",
+  "BDO Australia (workday): RetryError: HTTPSConnectionPool(host='bdoau.wd105.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/bdoau/BDOE"
+ ],
  "new": [
-  {
-   "score": 12.0,
-   "category": "Software engineering",
-   "company": "RecordPoint",
-   "title": "Graduate Software Engineer",
-   "location": "Sydney, NSW, Australia / Melbourne, VIC, Australia",
-   "posted": "2026-10-14",
-   "first_seen": "2026-11-13",
-   "employment_type": "Full-Time Hybrid",
-   "source": "lever",
-   "url": "https://jobs.lever.co/recordpoint/65811c7e-96fc-4c9f-aca9-05a935f3e971",
-   "reasons": "software engineering; location: melbourne",
-   "key": "81e2b363800492bc",
-   "source_id": "65811c7e-96fc-4c9f-aca9-05a935f3e971"
-  },
-  {
-   "score": 10.0,
-   "category": "IT / Tech",
-   "company": "Motorola Solutions",
-   "title": "Graduate Engineer",
-   "location": "Melbourne, Australia",
-   "posted": "2026-10-16",
-   "first_seen": "2026-11-13",
-   "employment_type": "",
-   "source": "workday",
-   "url": "https://motorolasolutions.wd5.myworkdayjobs.com/en-US/Careers/job/Melbourne-Australia/Graduate-Engineer_R68934",
-   "reasons": "it / tech; location: melbourne",
-   "key": "bd567dda4999d5dc",
-   "source_id": "R68934"
-  },
   {
    "score": 9.0,
    "category": "General program",
@@ -73,36 +53,6 @@
   }
  ],
  "all": [
-  {
-   "score": 12.0,
-   "category": "Software engineering",
-   "company": "RecordPoint",
-   "title": "Graduate Software Engineer",
-   "location": "Sydney, NSW, Australia / Melbourne, VIC, Australia",
-   "posted": "2026-10-14",
-   "first_seen": "2026-11-13",
-   "employment_type": "Full-Time Hybrid",
-   "source": "lever",
-   "url": "https://jobs.lever.co/recordpoint/65811c7e-96fc-4c9f-aca9-05a935f3e971",
-   "reasons": "software engineering; location: melbourne",
-   "key": "81e2b363800492bc",
-   "source_id": "65811c7e-96fc-4c9f-aca9-05a935f3e971"
-  },
-  {
-   "score": 10.0,
-   "category": "IT / Tech",
-   "company": "Motorola Solutions",
-   "title": "Graduate Engineer",
-   "location": "Melbourne, Australia",
-   "posted": "2026-10-16",
-   "first_seen": "2026-11-13",
-   "employment_type": "",
-   "source": "workday",
-   "url": "https://motorolasolutions.wd5.myworkdayjobs.com/en-US/Careers/job/Melbourne-Australia/Graduate-Engineer_R68934",
-   "reasons": "it / tech; location: melbourne",
-   "key": "bd567dda4999d5dc",
-   "source_id": "R68934"
-  },
   {
    "score": 9.0,
    "category": "General program",
