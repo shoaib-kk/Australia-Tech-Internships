@@ -1,6 +1,6 @@
-# Tech internship & grad openings - 2026-11-16
+# Tech internship & grad openings - 2026-11-17
 
-**2 new** in the last 7 days · 2 matching roles open in total · 10365 postings scanned from 45 boards.
+**2 new** in the last 7 days · 2 matching roles open in total · 10367 postings scanned from 45 boards.
 
 New by category: General program 1, IT / Tech 1
 
