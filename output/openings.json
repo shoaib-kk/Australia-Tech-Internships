@@ -1,24 +1,24 @@
 {
- "generated": "2026-11-17",
+ "generated": "2026-11-18",
  "stats": {
-  "fetched": 10367,
+  "fetched": 10366,
   "boards_ok": 45,
   "boards_failed": 9,
-  "matched": 2,
+  "matched": 1,
   "new": 0,
-  "new_this_week": 2,
+  "new_this_week": 1,
   "skipped_already_applied": 0
  },
  "errors": [
   "DXC Technology (workday): RetryError: HTTPSConnectionPool(host='dxctechnology.wd1.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/dxct",
   "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/CommBank_C",
   "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/private_ad",
-  "Telstra (workday): RetryError: HTTPSConnectionPool(host='telstra.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/telstra/Te",
   "nbn (workday): RetryError: HTTPSConnectionPool(host='nbn.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/nbn/nbncareers",
-  "Reserve Bank of Australia (workday): RetryError: HTTPSConnectionPool(host='rba.wd105.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/rba/RBA_Care",
+  "Telstra (workday): RetryError: HTTPSConnectionPool(host='telstra.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/telstra/Te",
   "Motorola Solutions (workday): RetryError: HTTPSConnectionPool(host='motorolasolutions.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/",
   "Visa (workday): RetryError: HTTPSConnectionPool(host='visa.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/visa/Visa_Ear",
-  "BDO Australia (workday): RetryError: HTTPSConnectionPool(host='bdoau.wd105.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/bdoau/BDOE"
+  "BDO Australia (workday): RetryError: HTTPSConnectionPool(host='bdoau.wd105.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/bdoau/BDOE",
+  "Reserve Bank of Australia (workday): RetryError: HTTPSConnectionPool(host='rba.wd105.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/rba/RBA_Care"
  ],
  "new": [
   {
@@ -35,21 +35,6 @@
    "reasons": "early-career program (check for a tech stream); internship; location: melbourne",
    "key": "6e7a31f1050fdc7b",
    "source_id": "4414221009"
-  },
-  {
-   "score": 9.0,
-   "category": "IT / Tech",
-   "company": "Lorikeet",
-   "title": "Forward Deployed Engineer Intern",
-   "location": "Sydney, Australia HQ",
-   "posted": "2026-10-23",
-   "first_seen": "2026-11-13",
-   "employment_type": "FullTime",
-   "source": "ashby",
-   "url": "https://jobs.ashbyhq.com/Lorikeet/62f54845-4529-4562-aa9b-24a95c46b0c0",
-   "reasons": "it / tech; internship",
-   "key": "9489e9a72e3b07b0",
-   "source_id": "62f54845-4529-4562-aa9b-24a95c46b0c0"
   }
  ],
  "all": [
@@ -67,21 +52,6 @@
    "reasons": "early-career program (check for a tech stream); internship; location: melbourne",
    "key": "6e7a31f1050fdc7b",
    "source_id": "4414221009"
-  },
-  {
-   "score": 9.0,
-   "category": "IT / Tech",
-   "company": "Lorikeet",
-   "title": "Forward Deployed Engineer Intern",
-   "location": "Sydney, Australia HQ",
-   "posted": "2026-10-23",
-   "first_seen": "2026-11-13",
-   "employment_type": "FullTime",
-   "source": "ashby",
-   "url": "https://jobs.ashbyhq.com/Lorikeet/62f54845-4529-4562-aa9b-24a95c46b0c0",
-   "reasons": "it / tech; internship",
-   "key": "9489e9a72e3b07b0",
-   "source_id": "62f54845-4529-4562-aa9b-24a95c46b0c0"
   }
  ]
 }
