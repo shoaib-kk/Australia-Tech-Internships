@@ -4,7 +4,7 @@
 
 **Software · Data & AI · Cloud · Cyber · IT** internships, vacationer programs, cadetships and graduate roles across Sydney, Melbourne, Brisbane, Perth, Adelaide and Canberra, checked every day straight from employer career sites.
 
-![open roles](https://img.shields.io/badge/open_roles-2-2ea44f) ![companies](https://img.shields.io/badge/companies-2-blue) ![new this week](https://img.shields.io/badge/new_this_week-2-orange) ![updated](https://img.shields.io/badge/updated-2026--11--18-lightgrey)
+![open roles](https://img.shields.io/badge/open_roles-2-2ea44f) ![companies](https://img.shields.io/badge/companies-2-blue) ![new this week](https://img.shields.io/badge/new_this_week-2-orange) ![updated](https://img.shields.io/badge/updated-2026--11--19-lightgrey)
 
 ⭐ **Star this repo** so it's here when applications open &nbsp;·&nbsp; 🙏 **Found a role we missed? [Add it in a minute](https://github.com/shoaib-kk/Australia-Tech-Internships/issues/new?template=add-role.yml)**
 
