@@ -1,42 +1,24 @@
 {
- "generated": "2026-11-19",
+ "generated": "2026-11-20",
  "stats": {
-  "fetched": 10370,
-  "boards_ok": 45,
-  "boards_failed": 9,
+  "fetched": 10414,
+  "boards_ok": 47,
+  "boards_failed": 7,
   "matched": 1,
   "new": 0,
-  "new_this_week": 1,
+  "new_this_week": 0,
   "skipped_already_applied": 0
  },
  "errors": [
+  "DXC Technology (workday): RetryError: HTTPSConnectionPool(host='dxctechnology.wd1.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/dxct",
   "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/CommBank_C",
   "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/private_ad",
-  "nbn (workday): RetryError: HTTPSConnectionPool(host='nbn.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/nbn/nbncareers",
   "Telstra (workday): RetryError: HTTPSConnectionPool(host='telstra.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/telstra/Te",
-  "DXC Technology (workday): RetryError: HTTPSConnectionPool(host='dxctechnology.wd1.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/dxct",
-  "Motorola Solutions (workday): RetryError: HTTPSConnectionPool(host='motorolasolutions.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/",
+  "nbn (workday): RetryError: HTTPSConnectionPool(host='nbn.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/nbn/nbncareers",
   "Visa (workday): RetryError: HTTPSConnectionPool(host='visa.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/visa/Visa_Ear",
-  "Reserve Bank of Australia (workday): RetryError: HTTPSConnectionPool(host='rba.wd105.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/rba/RBA_Care",
-  "BDO Australia (workday): RetryError: HTTPSConnectionPool(host='bdoau.wd105.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/bdoau/BDOE"
+  "Motorola Solutions (workday): RetryError: HTTPSConnectionPool(host='motorolasolutions.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/"
  ],
- "new": [
-  {
-   "score": 9.0,
-   "category": "General program",
-   "company": "AEMO",
-   "title": "Expression of Interest - 2027/28 AEMO Internships ",
-   "location": "Adelaide, South Australia, Australia; Brisbane, Queensland, Australia; Hobart, Tasmania, Australia; Melbourne, Victoria, Australia; Norwest, New South Wales, Australia; Perth, Western Australia, Australia; Sydney, New South Wales, Australia",
-   "posted": "2026-09-22",
-   "first_seen": "2026-11-13",
-   "employment_type": "",
-   "source": "greenhouse",
-   "url": "https://job-boards.greenhouse.io/australianenergymarketoperator/jobs/4414221009",
-   "reasons": "early-career program (check for a tech stream); internship; location: melbourne",
-   "key": "6e7a31f1050fdc7b",
-   "source_id": "4414221009"
-  }
- ],
+ "new": [],
  "all": [
   {
    "score": 9.0,
