@@ -1,7 +1,7 @@
 {
- "generated": "2026-11-20",
+ "generated": "2026-11-21",
  "stats": {
-  "fetched": 10414,
+  "fetched": 10453,
   "boards_ok": 47,
   "boards_failed": 7,
   "matched": 1,
@@ -12,11 +12,11 @@
  "errors": [
   "DXC Technology (workday): RetryError: HTTPSConnectionPool(host='dxctechnology.wd1.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/dxct",
   "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/CommBank_C",
-  "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/private_ad",
   "Telstra (workday): RetryError: HTTPSConnectionPool(host='telstra.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/telstra/Te",
-  "nbn (workday): RetryError: HTTPSConnectionPool(host='nbn.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/nbn/nbncareers",
+  "Motorola Solutions (workday): RetryError: HTTPSConnectionPool(host='motorolasolutions.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/",
   "Visa (workday): RetryError: HTTPSConnectionPool(host='visa.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/visa/Visa_Ear",
-  "Motorola Solutions (workday): RetryError: HTTPSConnectionPool(host='motorolasolutions.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/"
+  "nbn (workday): RetryError: HTTPSConnectionPool(host='nbn.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/nbn/nbncareers",
+  "CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/private_ad"
  ],
  "new": [],
  "all": [

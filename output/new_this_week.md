@@ -1,6 +1,6 @@
-# Tech internship & grad openings - 2026-11-20
+# Tech internship & grad openings - 2026-11-21
 
-**0 new** in the last 7 days · 1 matching roles open in total · 10414 postings scanned from 47 boards.
+**0 new** in the last 7 days · 1 matching roles open in total · 10453 postings scanned from 47 boards.
 
 ## New in the last 7 days
 
@@ -16,8 +16,8 @@ _Nothing new this week._
 
 - DXC Technology (workday): RetryError: HTTPSConnectionPool(host='dxctechnology.wd1.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/dxct
 - CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/CommBank_C
-- CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/private_ad
 - Telstra (workday): RetryError: HTTPSConnectionPool(host='telstra.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/telstra/Te
-- nbn (workday): RetryError: HTTPSConnectionPool(host='nbn.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/nbn/nbncareers
-- Visa (workday): RetryError: HTTPSConnectionPool(host='visa.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/visa/Visa_Ear
 - Motorola Solutions (workday): RetryError: HTTPSConnectionPool(host='motorolasolutions.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/
+- Visa (workday): RetryError: HTTPSConnectionPool(host='visa.wd5.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/visa/Visa_Ear
+- nbn (workday): RetryError: HTTPSConnectionPool(host='nbn.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/nbn/nbncareers
+- CommBank (workday): RetryError: HTTPSConnectionPool(host='cba.wd3.myworkdayjobs.com', port=443): Max retries exceeded with url: /wday/cxs/cba/private_ad
